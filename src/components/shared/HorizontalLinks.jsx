@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 
 const HorizontalLinks = () => {
 	return (
-		<ul className="flex items-center gap-x-1">
+		<ul className="flex items-center gap-x-1 font-medium">
 			<li>
 				<NavLink
 					to="/#services"
