@@ -1,7 +1,7 @@
 const HowItWorksStepCard = ({ data: step }) => {
 	const { icon: Icon, title, description } = step;
 	return (
-		<div className="how-it-works-card p-8 bg-light rounded-3xl space-y-5">
+		<div className="how-it-works-card p-8 bg-light hover:bg-primary/70 hover:shadow hover:shadow-lime-700/50 duration-200 rounded-3xl space-y-5">
 			<Icon
 				size={56}
 				strokeWidth={1}
