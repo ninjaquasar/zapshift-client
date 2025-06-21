@@ -5,10 +5,13 @@ import Logo from "../components/shared/Logo";
 const NavBar = () => {
 	return (
 		<header>
-			<nav className="bg-light px-8 py-5 rounded-2xl flex items-center justify-between shadow-md shadow-neutral-200">
+			<nav
+				id="navbar"
+				className="bg-light px-8 py-5 rounded-2xl flex items-center justify-between shadow-md shadow-neutral-200"
+			>
 				<Logo />
 				<HorizontalLinks />
-				<div className="flex items-center gap-x-3 text-lg font-semibold text-neutral-800">
+				<div className="nav-buttons flex items-center gap-x-3 text-lg font-semibold text-neutral-800">
 					<Link to="/auth/signin">
 						<button
 							type="button"

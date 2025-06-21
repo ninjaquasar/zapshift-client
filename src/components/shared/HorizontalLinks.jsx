@@ -2,13 +2,21 @@ import { NavLink } from "react-router";
 
 const HorizontalLinks = () => {
 	return (
-		<ul className="flex items-center gap-x-1 font-medium">
+		<ul className="horizontal-links flex items-center gap-x-1 font-medium">
 			<li>
 				<NavLink
 					to="/#services"
 					className="px-5 py-3 rounded-full hover:bg-primary/35 active:bg-primary/50 cursor-[url(cursor.png),_auto]"
 				>
 					Services
+				</NavLink>
+			</li>
+			<li>
+				<NavLink
+					to="/coverage"
+					className="px-5 py-3 rounded-full hover:bg-primary/35 active:bg-primary/50 cursor-[url(cursor.png),_auto]"
+				>
+					Coverage
 				</NavLink>
 			</li>
 			<li>

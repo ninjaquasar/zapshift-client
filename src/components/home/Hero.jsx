@@ -6,7 +6,10 @@ import HeroImage3 from "../../assets/hero-3.png";
 
 const Hero = () => {
 	return (
-		<section role="banner">
+		<section
+			id="hero"
+			role="banner"
+		>
 			<Carousel
 				autoPlay
 				infiniteLoop
@@ -15,25 +18,25 @@ const Hero = () => {
 				showThumbs={false}
 				useKeyboardArrows
 			>
-				<div>
+				<div className="hero-slide">
 					<img
 						src={HeroImage1}
 						alt="Hero Image 1"
-						className="max-h-[80vh] object-cover object-center rounded-4xl"
+						className="hero-slide-image max-h-[80vh] object-cover object-center rounded-4xl"
 					/>
 				</div>
-				<div>
+				<div className="hero-slide">
 					<img
 						src={HeroImage2}
 						alt="Hero Image 2"
-						className="max-h-[80vh] object-cover object-center rounded-4xl"
+						className="hero-slide-image max-h-[80vh] object-cover object-center rounded-4xl"
 					/>
 				</div>
-				<div>
+				<div className="hero-slide">
 					<img
 						src={HeroImage3}
 						alt="Hero Image 3"
-						className="max-h-[80vh] object-cover object-center rounded-4xl"
+						className="hero-slide-image max-h-[80vh] object-cover object-center rounded-4xl"
 					/>
 				</div>
 			</Carousel>
