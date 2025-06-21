@@ -1,0 +1,16 @@
+const HowItWorksStepCard = ({ data: step }) => {
+	const { Icon, title, description } = step;
+	return (
+		<div className="p-8 bg-light rounded-3xl space-y-5">
+			<Icon
+				size={56}
+				strokeWidth={1}
+				className="stroke-secondary"
+			/>
+			<h5 className="text-xl font-bold text-secondary">{title}</h5>
+			<p className="font-medium text-neutral-600">{description}</p>
+		</div>
+	);
+};
+
+export default HowItWorksStepCard;
