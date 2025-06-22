@@ -7,7 +7,7 @@ import BecomeMerchant from "../components/home/BecomeMerchant";
 
 const Home = () => {
 	return (
-		<main className="py-16 space-y-24">
+		<main className="pt-16 pb-24 space-y-24">
 			<Hero />
 			<HowItWorks />
 			<Services />
