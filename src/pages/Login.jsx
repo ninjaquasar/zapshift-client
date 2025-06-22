@@ -35,7 +35,7 @@ const Login = () => {
 						<input
 							type="password"
 							name="password"
-							placeholder="••••••••"
+							placeholder="••••••••••••"
 							required
 						/>
 					</label>
