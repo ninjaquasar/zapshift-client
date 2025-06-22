@@ -1,6 +1,15 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 const Login = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+	const onSubmit = (data) => {
+		console.log(data);
+	};
 	return (
 		<div
 			id="login"
@@ -20,6 +29,7 @@ const Login = () => {
 				<form
 					id="login-form"
 					className="space-y-3"
+					onSubmit={handleSubmit(onSubmit)}
 				>
 					<label className="input w-full font-medium text-[1rem] rounded-lg">
 						<span className="label text-neutral-600">Email</span>
@@ -27,7 +37,7 @@ const Login = () => {
 							type="email"
 							name="email"
 							placeholder="name@example.com"
-							required
+							{...register("email", { required: true })}
 						/>
 					</label>
 					<label className="input w-full font-medium text-[1rem] rounded-lg">
@@ -36,7 +46,7 @@ const Login = () => {
 							type="password"
 							name="password"
 							placeholder="••••••••••••"
-							required
+							{...register("password", { required: true })}
 						/>
 					</label>
 					<button
