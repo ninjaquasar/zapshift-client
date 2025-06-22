@@ -7,7 +7,7 @@ import BecomeMerchant from "../components/home/BecomeMerchant";
 
 const Home = () => {
 	return (
-		<main className="pt-16 pb-24 space-y-24">
+		<div className="pt-16 pb-24 space-y-24">
 			<Hero />
 			<HowItWorks />
 			<Services />
@@ -16,7 +16,7 @@ const Home = () => {
 			<Benefits />
 			<div className="max-w-5/6 mx-auto border border-dashed border-secondary/60"></div>
 			<BecomeMerchant />
-		</main>
+		</div>
 	);
 };
 

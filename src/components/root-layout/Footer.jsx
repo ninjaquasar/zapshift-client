@@ -1,6 +1,6 @@
 import { FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa6";
-import HorizontalLinks from "../components/shared/HorizontalLinks";
-import Logo from "../components/shared/Logo";
+import HorizontalLinks from "../shared/HorizontalLinks";
+import Logo from "../shared/Logo";
 
 const Footer = () => {
 	return (
