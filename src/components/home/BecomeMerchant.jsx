@@ -20,13 +20,13 @@ const BecomeMerchant = () => {
 				<div className="flex items-center gap-4">
 					<button
 						type="button"
-						className="text-xl font-bold bg-primary px-6 py-3 rounded-full border border-primary hover:bg-inherit hover:text-primary transition-colors duration-100 cursor-pointer"
+						className="btn btn-primary btn-xl text-dark rounded-full text-xl"
 					>
 						Become a Merchant
 					</button>
 					<button
 						type="button"
-						className="text-xl font-bold bg-inherit text-primary px-6 py-3 rounded-full border border-primary hover:bg-primary hover:text-dark transition-colors duration-100 cursor-pointer"
+						className="btn btn-outline btn-primary btn-xl text-primary hover:text-dark rounded-full text-xl"
 					>
 						Earn with ZapShift Courier
 					</button>

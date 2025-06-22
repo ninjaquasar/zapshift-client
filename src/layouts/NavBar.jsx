@@ -11,11 +11,11 @@ const NavBar = () => {
 			>
 				<Logo />
 				<HorizontalLinks />
-				<div className="nav-buttons flex items-center gap-x-3 text-lg font-semibold text-neutral-800">
+				<div className="nav-buttons flex items-center gap-x-3 text-lg font-semibold">
 					<Link to="/auth/signin">
 						<button
 							type="button"
-							className="px-6 py-2.5 border border-neutral-300 rounded-xl hover:bg-neutral-100 cursor-pointer"
+							className="btn btn-lg btn-outline  text-neutral-800 rounded-lg"
 						>
 							Sign In
 						</button>
@@ -23,7 +23,7 @@ const NavBar = () => {
 					<Link to="/">
 						<button
 							type="button"
-							className="px-6 py-2.5 bg-primary hover:bg-primary/85 rounded-xl cursor-pointer"
+							className="btn btn-lg btn-primary  text-neutral-800 rounded-lg"
 						>
 							Be a Rider
 						</button>
