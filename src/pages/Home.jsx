@@ -3,6 +3,7 @@ import HowItWorks from "../components/home/HowItWorks";
 import Services from "../components/home/Services";
 import TrustedBy from "../components/home/TrustedBy";
 import Benefits from "../components/home/Benefits";
+import BecomeMerchant from "../components/home/BecomeMerchant";
 
 const Home = () => {
 	return (
@@ -13,6 +14,8 @@ const Home = () => {
 			<TrustedBy />
 			<div className="max-w-5/6 mx-auto border border-dashed border-secondary/60"></div>
 			<Benefits />
+			<div className="max-w-5/6 mx-auto border border-dashed border-secondary/60"></div>
+			<BecomeMerchant />
 		</main>
 	);
 };

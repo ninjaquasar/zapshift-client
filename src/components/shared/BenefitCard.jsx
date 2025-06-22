@@ -1,7 +1,7 @@
 const BenefitCard = ({ benefit }) => {
 	const { image: illustration, title, description } = benefit;
 	return (
-		<div className="p-8 bg-light rounded-3xl flex items-center gap-12">
+		<div className="benefit-card p-8 bg-light hover:bg-primary/90 hover:shadow-md hover:shadow-lime-800/25 duration-200 rounded-3xl flex items-center gap-12">
 			<img
 				src={illustration}
 				alt="Illustration Image"

@@ -15,15 +15,15 @@ const NavBar = () => {
 					<Link to="/auth/signin">
 						<button
 							type="button"
-							className="px-6 py-2.5 border border-neutral-300 rounded-xl hover:bg-neutral-100 cursor-[url(cursor.png),_auto]"
+							className="px-6 py-2.5 border border-neutral-300 rounded-xl hover:bg-neutral-100 cursor-pointer"
 						>
 							Sign In
 						</button>
 					</Link>
-					<Link to="/auth/signin">
+					<Link to="/">
 						<button
 							type="button"
-							className="px-6 py-2.5 bg-primary hover:bg-primary/85 rounded-xl cursor-[url(cursor.png),_auto]"
+							className="px-6 py-2.5 bg-primary hover:bg-primary/85 rounded-xl cursor-pointer"
 						>
 							Be a Rider
 						</button>

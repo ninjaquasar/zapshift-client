@@ -3,10 +3,7 @@ import LogoImage from "../../assets/logo.png";
 
 const Logo = () => {
 	return (
-		<Link
-			to="/"
-			className="cursor-[url(cursor.png),_auto]"
-		>
+		<Link to="/">
 			<div className="flex items-end group">
 				<img
 					src={LogoImage}

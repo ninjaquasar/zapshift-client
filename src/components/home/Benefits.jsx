@@ -24,7 +24,10 @@ const Benefits = () => {
 		},
 	];
 	return (
-		<section className="max-w-5/6 mx-auto space-y-6">
+		<section
+			id="benefits"
+			className="max-w-5/6 mx-auto space-y-6"
+		>
 			{benefits.map((benefit) => (
 				<BenefitCard
 					key={benefit.title}

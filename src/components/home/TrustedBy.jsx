@@ -16,7 +16,10 @@ const TrustedBy = () => {
 		StartPeopleLogo,
 	];
 	return (
-		<section className="max-w-5/6 mx-auto space-y-10">
+		<section
+			id="trusted-by"
+			className="max-w-5/6 mx-auto space-y-10"
+		>
 			<h3 className="text-3xl font-extrabold text-center text-secondary">
 				We've helped thousands of sales teams
 			</h3>
