@@ -4,12 +4,14 @@ import AuthLogo from "../components/shared/AuthLogo";
 
 const AuthLayout = () => {
 	return (
-		<main className="grid grid-cols-5">
-			<div className="col-span-3 px-12 py-8">
+		<main className="grid grid-cols-2">
+			<div className="flex gap-4 px-12 py-8">
 				<AuthLogo />
-				<Outlet />
+				<div className="h-full flex items-center">
+					<Outlet />
+				</div>
 			</div>
-			<div className="col-span-2 min-h-screen h-full bg-primary/20 grid place-items-center">
+			<div className="min-h-screen h-full bg-primary/20 grid place-items-center">
 				<img
 					src={AuthImage}
 					alt="Authentication Image"

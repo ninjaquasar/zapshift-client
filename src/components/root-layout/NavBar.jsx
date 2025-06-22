@@ -12,7 +12,7 @@ const NavBar = () => {
 				<Logo />
 				<HorizontalLinks />
 				<div className="nav-buttons flex items-center gap-x-3 text-lg font-semibold">
-					<Link to="/auth/signin">
+					<Link to="/auth/login">
 						<button
 							type="button"
 							className="btn btn-lg btn-outline  text-neutral-800 rounded-lg"
