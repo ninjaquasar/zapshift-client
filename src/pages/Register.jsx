@@ -38,27 +38,53 @@ const Register = () => {
 								type="text"
 								name="name"
 								placeholder="Harry Potter"
-								{...register("name", { required: true })}
+								{...register("name", { required: "Full Name is required" })}
 							/>
 						</label>
+						{errors.name && (
+							<p className="text-error font-medium">{errors.name.message}</p>
+						)}
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-neutral-600">Email</span>
 							<input
 								type="email"
 								name="email"
 								placeholder="name@example.com"
-								{...register("email", { required: true })}
+								{...register("email", {
+									required: "Email address is required",
+									pattern: {
+										value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+										message: "Invalid email address",
+									},
+								})}
 							/>
 						</label>
+						{errors.email && (
+							<p className="text-error font-medium">{errors.email.message}</p>
+						)}
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-neutral-600">Password</span>
 							<input
 								type="password"
 								name="password"
 								placeholder="••••••••••••"
-								{...register("password", { required: true, minLength: 6 })}
+								{...register("password", {
+									required: "Password is required",
+									minLength: {
+										value: 6,
+										message: "Password must include at least 6 characters",
+									},
+									pattern: {
+										value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+$/,
+										message:
+											"Password must include one lowercase and uppercase letter, and one digit",
+									},
+								})}
 							/>
 						</label>
+						{errors.password && (
+							<p className="text-error font-medium">{errors.password.message}</p>
+						)}
 						<button
 							type="submit"
 							className="btn btn-lg btn-primary btn-block text-dark rounded-lg"

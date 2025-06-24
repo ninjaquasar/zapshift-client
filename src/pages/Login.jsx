@@ -37,18 +37,30 @@ const Login = () => {
 							type="email"
 							name="email"
 							placeholder="name@example.com"
-							{...register("email", { required: true })}
+							{...register("email", {
+								required: "Email is required",
+								pattern: {
+									value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+									message: "Invalid email address",
+								},
+							})}
 						/>
 					</label>
+					{errors.email && (
+						<p className="text-error font-medium">{errors.email.message}</p>
+					)}
 					<label className="input w-full font-medium text-[1rem] rounded-lg">
 						<span className="label text-neutral-600">Password</span>
 						<input
 							type="password"
 							name="password"
 							placeholder="••••••••••••"
-							{...register("password", { required: true })}
+							{...register("password", { required: "Password is required" })}
 						/>
 					</label>
+					{errors.password && (
+						<p className="text-error font-medium">{errors.password.message}</p>
+					)}
 					<button
 						type="submit"
 						className="btn btn-lg btn-primary btn-block text-dark rounded-lg"
