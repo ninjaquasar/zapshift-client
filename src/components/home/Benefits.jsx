@@ -1,6 +1,6 @@
 import LiveParcelTrackingImage from "../../assets/illustrations/live-parcel-tracking.png";
 import CallCenterSupportImage from "../../assets/illustrations/call-center-support.png";
-import BenefitCard from "../shared/BenefitCard";
+import BenefitCard from "../cards/BenefitCard";
 
 const Benefits = () => {
 	const benefits = [

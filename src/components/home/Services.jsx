@@ -1,4 +1,4 @@
-import ServiceCard from "../shared/ServiceCard";
+import ServiceCard from "../cards/ServiceCard";
 
 const Services = () => {
 	const services = [

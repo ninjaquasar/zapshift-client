@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
 import { toast } from "sonner";
+import SocialLogin from "../components/shared/SocialLogin";
 
 const Register = () => {
 	const {
@@ -23,7 +24,9 @@ const Register = () => {
 				}, 4000);
 			})
 			.catch((error) => {
-				toast.error(error.message);
+				console.log(`${error.message} [${error.code}]`);
+				console.error("Firebase Auth Error:", error);
+				toast.error("Failed to create account. Please try again.");
 			});
 	};
 	return (
@@ -119,6 +122,7 @@ const Register = () => {
 							Login
 						</Link>
 					</p>
+					<SocialLogin />
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import useAuthContext from "../hooks/useAuthContext";
+import SocialLogin from "../components/shared/SocialLogin";
 
 const Login = () => {
 	const {
@@ -17,13 +18,15 @@ const Login = () => {
 		loginUserWithEmailAndPassword(email, password)
 			.then((authCredentials) => {
 				reset();
-				toast.success("Logged in to account");
+				toast.success("Logged in to your account");
 				setTimeout(() => {
 					navigate("/");
 				}, 4000);
 			})
 			.catch((error) => {
-				toast.error(error.message);
+				console.log(`${error.message} [${error.code}]`);
+				console.error("Firebase Auth Error:", error);
+				toast.error("Failed to login. Please try again.");
 			});
 	};
 	return (
@@ -93,6 +96,7 @@ const Login = () => {
 						Register
 					</Link>
 				</p>
+				<SocialLogin />
 			</div>
 		</div>
 	);

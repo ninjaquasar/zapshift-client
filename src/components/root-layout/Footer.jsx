@@ -1,6 +1,6 @@
-import { FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa6";
 import HorizontalLinks from "../shared/HorizontalLinks";
 import Logo from "../shared/Logo";
+import { IoLogoFacebook, IoLogoGithub, IoLogoLinkedin, IoLogoYoutube } from "react-icons/io5";
 
 const Footer = () => {
 	return (
@@ -30,7 +30,7 @@ const Footer = () => {
 					href="https://www.linkedin.com/in/riaurko"
 					target="_blank"
 				>
-					<FaLinkedin
+					<IoLogoLinkedin
 						size={36}
 						className="hover:fill-primary transition-colors duration-100"
 					/>
@@ -39,7 +39,7 @@ const Footer = () => {
 					href="https://github.com/ninjaquasar"
 					target="_blank"
 				>
-					<FaGithub
+					<IoLogoGithub
 						size={36}
 						className="hover:fill-primary transition-colors duration-100"
 					/>
@@ -48,7 +48,7 @@ const Footer = () => {
 					href="https://www.facebook.com/ninjaquasar"
 					target="_blank"
 				>
-					<FaFacebook
+					<IoLogoFacebook
 						size={36}
 						className="hover:fill-primary transition-colors duration-100"
 					/>
@@ -57,7 +57,7 @@ const Footer = () => {
 					href="https://www.youtube.com/@ninjaquasar"
 					target="_blank"
 				>
-					<FaYoutube
+					<IoLogoYoutube
 						size={36}
 						className="hover:fill-primary transition-colors duration-100"
 					/>

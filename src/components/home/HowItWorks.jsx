@@ -1,5 +1,5 @@
 import { TbBuildingStore, TbCashRegister, TbTruck, TbTruckDelivery } from "react-icons/tb";
-import HowItWorksStepCard from "../shared/HowItWorksStepCard";
+import HowItWorksStepCard from "../cards/HowItWorksStepCard";
 
 const HowItWorks = () => {
 	const steps = [
