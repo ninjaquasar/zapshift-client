@@ -1,14 +1,30 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
+import useAuthContext from "../hooks/useAuthContext";
 
 const Login = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm();
+	const { loginUserWithEmailAndPassword } = useAuthContext();
+	const navigate = useNavigate();
 	const onLogin = (data) => {
-		console.log(data);
+		const { email, password } = data;
+		loginUserWithEmailAndPassword(email, password)
+			.then((authCredentials) => {
+				reset();
+				toast.success("Logged in to account");
+				setTimeout(() => {
+					navigate("/");
+				}, 4000);
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
 	};
 	return (
 		<div

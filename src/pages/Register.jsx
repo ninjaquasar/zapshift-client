@@ -1,14 +1,30 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuthContext from "../hooks/useAuthContext";
+import { toast } from "sonner";
 
 const Register = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm();
+	const { registerUserWithEmailAndPassword } = useAuthContext();
+	const navigate = useNavigate();
 	const onRegister = (data) => {
-		console.log(data);
+		const { displayName, email, password } = data;
+		registerUserWithEmailAndPassword(email, password)
+			.then((authCredentials) => {
+				reset();
+				toast.success("Account created");
+				setTimeout(() => {
+					navigate("/");
+				}, 4000);
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
 	};
 	return (
 		<div>
@@ -33,12 +49,14 @@ const Register = () => {
 						onSubmit={handleSubmit(onRegister)}
 					>
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
-							<span className="label text-neutral-600">Name</span>
+							<span className="label text-neutral-600">Full Name</span>
 							<input
 								type="text"
 								name="name"
-								placeholder="Harry Potter"
-								{...register("name", { required: "Full Name is required" })}
+								placeholder="Itachi Uchiha"
+								{...register("displayName", {
+									required: "Full Name is required",
+								})}
 							/>
 						</label>
 						{errors.name && (
