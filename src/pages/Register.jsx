@@ -7,7 +7,7 @@ const Register = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const onSubmit = (data) => {
+	const onRegister = (data) => {
 		console.log(data);
 	};
 	return (
@@ -30,7 +30,7 @@ const Register = () => {
 					<form
 						id="register-form"
 						className="space-y-3"
-						onSubmit={handleSubmit(onSubmit)}
+						onSubmit={handleSubmit(onRegister)}
 					>
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-neutral-600">Name</span>

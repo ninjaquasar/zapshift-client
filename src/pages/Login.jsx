@@ -7,7 +7,7 @@ const Login = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const onSubmit = (data) => {
+	const onLogin = (data) => {
 		console.log(data);
 	};
 	return (
@@ -29,7 +29,7 @@ const Login = () => {
 				<form
 					id="login-form"
 					className="space-y-3"
-					onSubmit={handleSubmit(onSubmit)}
+					onSubmit={handleSubmit(onLogin)}
 				>
 					<label className="input w-full font-medium text-[1rem] rounded-lg">
 						<span className="label text-neutral-600">Email</span>
