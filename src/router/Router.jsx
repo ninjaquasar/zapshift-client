@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home";
 import AuthLayout from "../layouts/AuthLayout";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 import Coverage from "../pages/Coverage";
 
 const router = createBrowserRouter([

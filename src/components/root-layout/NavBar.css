@@ -1,0 +1,5 @@
+nav ul li a.active {
+	background-color: var(--color-primary);
+	color: var(--color-neutral-600);
+	font-weight: 700;
+}

@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import HorizontalLinks from "../shared/HorizontalLinks";
 import Logo from "../shared/Logo";
+import "./NavBar.css";
 
 const NavBar = () => {
 	return (
