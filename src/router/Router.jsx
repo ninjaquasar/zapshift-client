@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Coverage from "../pages/Coverage";
 
 const router = createBrowserRouter([
 	{
@@ -13,6 +14,11 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				Component: Home,
+			},
+			{
+				path: "/coverage",
+				Component: Coverage,
+				loader: () => fetch("coverageDistricts.json"),
 			},
 		],
 	},
