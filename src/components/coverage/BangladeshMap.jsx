@@ -6,6 +6,7 @@ const BangladeshMap = ({ markingLocations }) => {
 		<MapContainer
 			center={[24, 90.5]}
 			zoom={6.5}
+			scrollWheelZoom={false}
 			className="w-full h-full rounded-xl"
 		>
 			<TileLayer

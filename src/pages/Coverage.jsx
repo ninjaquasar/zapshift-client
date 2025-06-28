@@ -1,6 +1,7 @@
 import { TbSearch } from "react-icons/tb";
 import BangladeshMap from "../components/coverage/BangladeshMap";
 import { useLoaderData } from "react-router";
+import Divider from "../components/shared/Divider";
 
 const Coverage = () => {
 	const districts = useLoaderData();
@@ -33,7 +34,7 @@ const Coverage = () => {
 						Search
 					</button>
 				</div>
-				<div className="border border-base-light"></div>
+				<Divider />
 				<h3 className="text-3xl font-extrabold text-secondary">
 					We deliver almost all over Bangladesh
 				</h3>

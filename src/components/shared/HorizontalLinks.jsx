@@ -4,12 +4,12 @@ const HorizontalLinks = () => {
 	return (
 		<ul className="horizontal-links flex items-center gap-x-1 font-medium">
 			<li>
-				<a
-					href="/#services"
+				<NavLink
+					to="/parcel/send"
 					className="px-5 py-3 rounded-full hover:bg-primary/35 active:bg-primary/50"
 				>
-					Services
-				</a>
+					Send Parcel
+				</NavLink>
 			</li>
 			<li>
 				<NavLink

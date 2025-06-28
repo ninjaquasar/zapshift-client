@@ -6,8 +6,10 @@
 @plugin "daisyui/theme" {
 	name: "light";
 	default: true;
-	--color-primary: #caeb66;
+	--color-primary: #b9da55;
 	--color-secondary: #03373d;
+	--color-success: #3ba976;
+	--color-error: #dc3545;
 }
 
 @theme {
