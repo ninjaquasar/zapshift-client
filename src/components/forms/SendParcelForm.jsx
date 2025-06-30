@@ -223,6 +223,7 @@ const SendParcelForm = () => {
 								<span className="label text-dark">Receiver Name</span>
 								<input
 									type="text"
+									placeholder="Receiver Name"
 									{...register("receiver_name", {
 										required: "Receiver Name is required",
 									})}
@@ -279,6 +280,7 @@ const SendParcelForm = () => {
 								<span className="label text-dark">Receiver Contact</span>
 								<input
 									type="tel"
+									placeholder="Receiver Contact No."
 									{...register("receiver_contact", {
 										required: "Receiver Contact No. is required",
 										pattern: {
