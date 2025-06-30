@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 			{
 				path: "/coverage",
 				Component: Coverage,
-				loader: () => fetch("coverageDistricts.json"),
+				loader: () => fetch("warehouses.json"),
 			},
 			{
 				path: "/parcel/send",

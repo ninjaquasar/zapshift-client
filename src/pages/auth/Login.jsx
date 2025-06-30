@@ -13,7 +13,7 @@ const Login = () => {
 	} = useForm();
 	const { loginUserWithEmailAndPassword } = useAuthContext();
 	const navigate = useNavigate();
-	const onLogin = (data) => {
+	const handleLogin = (data) => {
 		const { email, password } = data;
 		loginUserWithEmailAndPassword(email, password)
 			.then((authCredentials) => {
@@ -48,7 +48,7 @@ const Login = () => {
 				<form
 					id="login-form"
 					className="space-y-3"
-					onSubmit={handleSubmit(onLogin)}
+					onSubmit={handleSubmit(handleLogin)}
 				>
 					<label className="input w-full font-medium text-[1rem] rounded-lg">
 						<span className="label text-neutral-600">Email</span>

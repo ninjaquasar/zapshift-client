@@ -4,7 +4,7 @@ import Divider from "../components/shared/Divider";
 const SendParcel = () => {
 	return (
 		<div
-			id="add-parcel-page"
+			id="send-parcel-page"
 			className="pt-16 pb-24"
 		>
 			<div className="px-24 py-20 bg-light rounded-4xl space-y-12">

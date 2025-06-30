@@ -13,7 +13,7 @@ const Register = () => {
 	} = useForm();
 	const { registerUserWithEmailAndPassword } = useAuthContext();
 	const navigate = useNavigate();
-	const onRegister = (data) => {
+	const handleRegister = (data) => {
 		const { displayName, email, password } = data;
 		registerUserWithEmailAndPassword(email, password)
 			.then((authCredentials) => {
@@ -49,7 +49,7 @@ const Register = () => {
 					<form
 						id="register-form"
 						className="space-y-3"
-						onSubmit={handleSubmit(onRegister)}
+						onSubmit={handleSubmit(handleRegister)}
 					>
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-neutral-600">Full Name</span>
