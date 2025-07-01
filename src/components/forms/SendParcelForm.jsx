@@ -4,17 +4,22 @@ import calculateTotalDeliveryCost from "../../utils/calculateTotalDeliveryCost";
 import { useLoaderData } from "react-router";
 
 const SendParcelForm = () => {
+	// Import necessary functions and states from react-hook-form
 	const {
 		register,
 		watch,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+	// Fetch warehouses data
 	const warehouses = useLoaderData() || [];
+	// Watch some form input field's value (works as onChange or useRef)
 	const parcelType = watch("parcel_type");
 	const senderRegion = watch("sender_region");
 	const receiverRegion = watch("receiver_region");
+	// Set regions for select field in form
 	const regions = [...new Set(warehouses.map((warehouse) => warehouse.region))];
+	// Set & dynamically change sender's & receiver's warehouses/districts based on selected region
 	const senderDistricts = senderRegion
 		? warehouses
 				.filter((warehouse) => warehouse.region === senderRegion)
@@ -25,12 +30,15 @@ const SendParcelForm = () => {
 				.filter((warehouse) => warehouse.region === receiverRegion)
 				.map((warehouse) => warehouse.district)
 		: [];
+	// Handle function for sending parcel or confirm booking
 	const handleConfirmBooking = (data) => {
+		// Add extra necessary data
 		data.payment_status = "unpaid";
 		data.delivery_status = "pending";
 		data.created_at = new Date().toISOString();
 		if (data.parcel_weight) data.parcel_weight = parseFloat(data.parcel_weight);
 		parcelType === "Document" && delete data.parcel_weight;
+		// Calculate total delivery cost and set it to parcel data
 		const deliveryCost = calculateTotalDeliveryCost(
 			data.parcel_type,
 			data.parcel_weight,
@@ -40,11 +48,13 @@ const SendParcelForm = () => {
 		data.delivery_cost = deliveryCost;
 	};
 	return (
+		// Send Parcel Form
 		<form
 			id="send-parcel-form"
 			className="space-y-8"
 			onSubmit={handleSubmit(handleConfirmBooking)}
 		>
+			{/* Document Type */}
 			<div className="space-y-2">
 				<div className="flex items-center gap-x-12">
 					<div className="flex items-center gap-x-2">
@@ -78,7 +88,9 @@ const SendParcelForm = () => {
 					<p className="text-error font-medium">{errors.parcel_type.message}</p>
 				)}
 			</div>
+			{/* Parcel Information */}
 			<div className="grid grid-cols-2 gap-8">
+				{/* Parcel Name */}
 				<div className="space-y-1">
 					<label className="input w-full font-medium text-[1rem] rounded-lg">
 						<span className="label text-dark">Parcel Name</span>
@@ -90,10 +102,12 @@ const SendParcelForm = () => {
 							})}
 						/>
 					</label>
+					{/* Field-Error */}
 					{errors?.parcel_name && (
 						<p className="text-error font-medium">{errors.parcel_name.message}</p>
 					)}
 				</div>
+				{/* Parcel Weight (show/hide based on parcel type) */}
 				{parcelType === "Not Document" && (
 					<div className="space-y-1">
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
@@ -115,6 +129,7 @@ const SendParcelForm = () => {
 								})}
 							/>
 						</label>
+						{/* Field-Error */}
 						{errors?.parcel_weight && (
 							<p className="text-error font-medium">
 								{errors.parcel_weight.message}
@@ -123,10 +138,14 @@ const SendParcelForm = () => {
 					</div>
 				)}
 			</div>
+			{/* A Divider line (just for UX enhancement) */}
 			<Divider />
+			{/* Sender & Receiver Details in 2-column layout */}
 			<div className="grid grid-cols-2 gap-8">
+				{/* Sender Information */}
 				<div className="space-y-8">
 					<h5 className="text-xl font-extrabold text-secondary">Sender Details</h5>
+					{/* Sender Name, Warehouse, Address, Contact */}
 					<div className="grid grid-cols-2 gap-8">
 						<div className="space-y-1">
 							<label className="input w-full font-medium text-[1rem] rounded-lg">
@@ -216,6 +235,7 @@ const SendParcelForm = () => {
 							)}
 						</div>
 					</div>
+					{/* Sender Region */}
 					<div className="space-y-1">
 						<label className="select w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-dark">Sender Region</span>
@@ -247,6 +267,7 @@ const SendParcelForm = () => {
 							</p>
 						)}
 					</div>
+					{/* Parcel Pickup Instructions */}
 					<div className="space-y-1">
 						<label>
 							<span className="font-medium">Pickup Instructions</span>
@@ -270,8 +291,10 @@ const SendParcelForm = () => {
 						)}
 					</div>
 				</div>
+				{/* Receiver Information */}
 				<div className="space-y-8">
 					<h5 className="text-xl font-extrabold text-secondary">Receiver Details</h5>
+					{/* Receiver Name, Warehouse, Address, Contact */}
 					<div className="grid grid-cols-2 gap-8">
 						<div className="space-y-1">
 							<label className="input w-full font-medium text-[1rem] rounded-lg">
@@ -361,6 +384,7 @@ const SendParcelForm = () => {
 							)}
 						</div>
 					</div>
+					{/* Receiver Region */}
 					<div className="space-y-1">
 						<label className="select w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-dark">Receiver Region</span>
@@ -392,6 +416,7 @@ const SendParcelForm = () => {
 							</p>
 						)}
 					</div>
+					{/* Parcel Delivery Instructions */}
 					<div className="space-y-1">
 						<label>
 							<span className="font-medium">Delivery Instructions</span>
