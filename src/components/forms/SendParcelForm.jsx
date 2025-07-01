@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import Divider from "../shared/Divider";
+import calculateTotalDeliveryCost from "../../utils/calculateTotalDeliveryCost";
 
 const SendParcelForm = () => {
 	const {
@@ -15,6 +16,13 @@ const SendParcelForm = () => {
 		data.created_at = new Date().toISOString();
 		if (data.parcel_weight) data.parcel_weight = parseFloat(data.parcel_weight);
 		parcelType === "Document" && delete data.parcel_weight;
+		const deliveryCost = calculateTotalDeliveryCost(
+			data.parcel_type,
+			data.parcel_weight,
+			data.sender_warehouse,
+			data.receiver_warehouse,
+		);
+		data.delivery_cost = deliveryCost;
 		console.log(data);
 	};
 	return (
