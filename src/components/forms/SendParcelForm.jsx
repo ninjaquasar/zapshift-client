@@ -25,7 +25,6 @@ const SendParcelForm = () => {
 				.filter((warehouse) => warehouse.region === receiverRegion)
 				.map((warehouse) => warehouse.district)
 		: [];
-	console.log(warehouses);
 	const handleConfirmBooking = (data) => {
 		data.payment_status = "unpaid";
 		data.delivery_status = "pending";
