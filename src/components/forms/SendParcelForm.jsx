@@ -4,11 +4,18 @@ import Divider from "../shared/Divider";
 const SendParcelForm = () => {
 	const {
 		register,
+		watch,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+	const parcelType = watch("parcel_type");
 	const handleConfirmBooking = (data) => {
-		console.log("Need to send a parcel");
+		data.payment_status = "unpaid";
+		data.delivery_status = "pending";
+		data.created_at = new Date().toISOString();
+		if (data.parcel_weight) data.parcel_weight = parseFloat(data.parcel_weight);
+		parcelType === "Document" && delete data.parcel_weight;
+		console.log(data);
 	};
 	return (
 		<form
@@ -65,24 +72,34 @@ const SendParcelForm = () => {
 						<p className="text-error font-medium">{errors.parcel_name.message}</p>
 					)}
 				</div>
-				<div className="space-y-1">
-					<label className="input w-full font-medium text-[1rem] rounded-lg">
-						<span className="label text-dark">Parcel Weight</span>
-						<input
-							type="number"
-							step={0.5}
-							placeholder="Parcel Weight (KG)"
-							{...register("parcel_weight", {
-								required: "Parcel Weight is required",
-								min: { value: 0.5, message: "Minimum weight is 0.5 KG" },
-								max: { value: 20, message: "Maximum weight is 20 KG" },
-							})}
-						/>
-					</label>
-					{errors?.parcel_weight && (
-						<p className="text-error font-medium">{errors.parcel_weight.message}</p>
-					)}
-				</div>
+				{parcelType === "Not Document" && (
+					<div className="space-y-1">
+						<label className="input w-full font-medium text-[1rem] rounded-lg">
+							<span className="label text-dark">Parcel Weight</span>
+							<input
+								type="number"
+								step={0.5}
+								placeholder="Parcel Weight (KG)"
+								{...register("parcel_weight", {
+									required: "Parcel Weight is required",
+									min: {
+										value: 0.5,
+										message: "Minimum weight is 0.5 KG",
+									},
+									max: {
+										value: 20,
+										message: "Maximum weight is 20 KG",
+									},
+								})}
+							/>
+						</label>
+						{errors?.parcel_weight && (
+							<p className="text-error font-medium">
+								{errors.parcel_weight.message}
+							</p>
+						)}
+					</div>
+				)}
 			</div>
 			<Divider />
 			<div className="grid grid-cols-2 gap-8">

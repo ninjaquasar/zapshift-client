@@ -1,16 +1,20 @@
 import { NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const HorizontalLinks = () => {
+	const { user } = useAuth();
 	return (
 		<ul className="horizontal-links flex items-center gap-x-1 font-medium">
-			<li>
-				<NavLink
-					to="/parcel/send"
-					className="px-5 py-3 rounded-full hover:bg-primary/35 active:bg-primary/50"
-				>
-					Send Parcel
-				</NavLink>
-			</li>
+			{user && (
+				<li>
+					<NavLink
+						to="/parcel/send"
+						className="px-5 py-3 rounded-full hover:bg-primary/35 active:bg-primary/50"
+					>
+						Send Parcel
+					</NavLink>
+				</li>
+			)}
 			<li>
 				<NavLink
 					to="/coverage"

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuth from "../../hooks/useAuth";
 import { toast } from "sonner";
 import SocialLogin from "../../components/shared/SocialLogin";
 
@@ -11,7 +11,7 @@ const Register = () => {
 		reset,
 		formState: { errors },
 	} = useForm();
-	const { registerUserWithEmailAndPassword } = useAuthContext();
+	const { registerUserWithEmailAndPassword } = useAuth();
 	const navigate = useNavigate();
 	const handleRegister = (data) => {
 		const { displayName, email, password } = data;

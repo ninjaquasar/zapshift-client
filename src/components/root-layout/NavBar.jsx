@@ -2,8 +2,10 @@ import { Link } from "react-router";
 import HorizontalLinks from "../shared/HorizontalLinks";
 import Logo from "../shared/Logo";
 import "./NavBar.css";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
+	const { user } = useAuth();
 	return (
 		<header>
 			<nav
@@ -13,14 +15,23 @@ const NavBar = () => {
 				<Logo />
 				<HorizontalLinks />
 				<div className="nav-buttons flex items-center gap-x-3 text-lg font-semibold">
-					<Link to="/auth/login">
+					{user ? (
 						<button
 							type="button"
 							className="btn btn-lg btn-outline  text-neutral-800 rounded-lg"
 						>
-							Sign In
+							Logout
 						</button>
-					</Link>
+					) : (
+						<Link to="/auth/login">
+							<button
+								type="button"
+								className="btn btn-lg btn-outline  text-neutral-800 rounded-lg"
+							>
+								Sign In
+							</button>
+						</Link>
+					)}
 					<Link to="/">
 						<button
 							type="button"

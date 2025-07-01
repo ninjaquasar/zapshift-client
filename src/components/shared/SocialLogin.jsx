@@ -1,10 +1,10 @@
 import { IoLogoGoogle } from "react-icons/io5";
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const SocialLogin = () => {
-	const { loginUserWithGoogle } = useAuthContext();
+	const { loginUserWithGoogle } = useAuth();
 	const navigate = useNavigate();
 	const handleGoogleLogin = () => {
 		loginUserWithGoogle()
