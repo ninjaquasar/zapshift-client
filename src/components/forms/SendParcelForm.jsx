@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Divider from "../shared/Divider";
 import calculateTotalDeliveryCost from "../../utils/calculateTotalDeliveryCost";
+import { useLoaderData } from "react-router";
 
 const SendParcelForm = () => {
 	const {
@@ -9,7 +10,22 @@ const SendParcelForm = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+	const warehouses = useLoaderData() || [];
 	const parcelType = watch("parcel_type");
+	const senderRegion = watch("sender_region");
+	const receiverRegion = watch("receiver_region");
+	const regions = [...new Set(warehouses.map((warehouse) => warehouse.region))];
+	const senderDistricts = senderRegion
+		? warehouses
+				.filter((warehouse) => warehouse.region === senderRegion)
+				.map((warehouse) => warehouse.district)
+		: [];
+	const receiverDistricts = receiverRegion
+		? warehouses
+				.filter((warehouse) => warehouse.region === receiverRegion)
+				.map((warehouse) => warehouse.district)
+		: [];
+	console.log(warehouses);
 	const handleConfirmBooking = (data) => {
 		data.payment_status = "unpaid";
 		data.delivery_status = "pending";
@@ -23,7 +39,6 @@ const SendParcelForm = () => {
 			data.receiver_warehouse,
 		);
 		data.delivery_cost = deliveryCost;
-		console.log(data);
 	};
 	return (
 		<form
@@ -146,6 +161,14 @@ const SendParcelForm = () => {
 									>
 										Select Warehouse
 									</option>
+									{senderDistricts.map((district) => (
+										<option
+											key={district}
+											value={district}
+										>
+											{district}
+										</option>
+									))}
 								</select>
 							</label>
 							{errors?.sender_warehouse && (
@@ -209,6 +232,14 @@ const SendParcelForm = () => {
 								>
 									Select Region
 								</option>
+								{regions.map((region) => (
+									<option
+										key={region}
+										value={region}
+									>
+										{region}
+									</option>
+								))}
 							</select>
 						</label>
 						{errors?.sender_region && (
@@ -275,6 +306,14 @@ const SendParcelForm = () => {
 									>
 										Select Warehouse
 									</option>
+									{receiverDistricts.map((district) => (
+										<option
+											key={district}
+											value={district}
+										>
+											{district}
+										</option>
+									))}
 								</select>
 							</label>
 							{errors?.receiver_warehouse && (
@@ -325,7 +364,7 @@ const SendParcelForm = () => {
 					</div>
 					<div className="space-y-1">
 						<label className="select w-full font-medium text-[1rem] rounded-lg">
-							<span className="label text-dark">Reciever Region</span>
+							<span className="label text-dark">Receiver Region</span>
 							<select
 								defaultValue="None"
 								{...register("receiver_region", {
@@ -338,6 +377,14 @@ const SendParcelForm = () => {
 								>
 									Select Region
 								</option>
+								{regions.map((region) => (
+									<option
+										key={region}
+										value={region}
+									>
+										{region}
+									</option>
+								))}
 							</select>
 						</label>
 						{errors?.receiver_region && (
