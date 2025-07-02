@@ -2,6 +2,10 @@ import { useForm } from "react-hook-form";
 import Divider from "../shared/Divider";
 import calculateTotalDeliveryCost from "../../utils/calculateTotalDeliveryCost";
 import { useLoaderData } from "react-router";
+import apiClient from "../../services/apiClient";
+import { toast } from "sonner";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const SendParcelForm = () => {
 	// Import necessary functions and states from react-hook-form
@@ -30,22 +34,107 @@ const SendParcelForm = () => {
 				.filter((warehouse) => warehouse.region === receiverRegion)
 				.map((warehouse) => warehouse.district)
 		: [];
+	// Get currently logged-in user data
+	const { user } = useAuth();
 	// Handle function for sending parcel or confirm booking
 	const handleConfirmBooking = (data) => {
-		// Add extra necessary data
-		data.payment_status = "unpaid";
-		data.delivery_status = "pending";
-		data.created_at = new Date().toISOString();
-		if (data.parcel_weight) data.parcel_weight = parseFloat(data.parcel_weight);
-		parcelType === "Document" && delete data.parcel_weight;
-		// Calculate total delivery cost and set it to parcel data
+		// Destructure data to clean it
+		const {
+			parcel_name,
+			parcel_type,
+			parcel_weight,
+			pickup_instructions,
+			delivery_instructions,
+			sender_address,
+			sender_contact,
+			sender_name,
+			sender_region,
+			sender_warehouse,
+			receiver_address,
+			receiver_contact,
+			receiver_name,
+			receiver_region,
+			receiver_warehouse,
+		} = data;
+		// Calculate total delivery cost
 		const deliveryCost = calculateTotalDeliveryCost(
 			data.parcel_type,
 			data.parcel_weight,
 			data.sender_warehouse,
 			data.receiver_warehouse,
 		);
-		data.delivery_cost = deliveryCost;
+		// Clean data and add extra necessary data
+		const cleanedData = {
+			booked_at: new Date().toISOString(),
+			booked_by: user.email,
+			delivery: {
+				cost: deliveryCost,
+				status: "pending",
+			},
+			instructions: {
+				pickup: pickup_instructions,
+				delivery: delivery_instructions,
+			},
+			parcel: {
+				name: parcel_name,
+				type: parcel_type,
+				...(parcel_type === "Not Document" && { weight: parseFloat(parcel_weight) }),
+			},
+			payment: {
+				total_amount: deliveryCost,
+				status: "unpaid",
+			},
+			sender: {
+				name: sender_name,
+				region: sender_region,
+				warehouse: sender_warehouse,
+				address: sender_address,
+				contact: sender_contact,
+			},
+			receiver: {
+				name: receiver_name,
+				region: receiver_region,
+				warehouse: receiver_warehouse,
+				address: receiver_address,
+				contact: receiver_contact,
+			},
+		};
+		// Confirm before sending data to server/database
+		Swal.fire({
+			icon: "question",
+			iconColor: "var(--color-primary)",
+			title: "Confirm Booking",
+			html: `
+				<p><strong>Delivery Cost:</strong> ৳${cleanedData.delivery.cost}</p>
+				<a href="/policies/payment" target="_blank" class="text-lime-700 hover:underline hover:underline-offset-2">See how delivery costs are calculated</a>
+			`,
+			showCancelButton: true,
+			confirmButtonColor: "var(--color-success)",
+			cancelButtonColor: "var(--color-error)",
+			confirmButtonText: "Confirm Booking",
+			cancelButtonText: "Go Back to Editing",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				apiClient
+					.post("/parcels", cleanedData)
+					.then((response) => {
+						if (response.data?.insertedId) {
+							toast.success("Your parcel is booked.");
+						} else {
+							toast.error(
+								"We couldn't complete the booking. Please try one more time.",
+							);
+						}
+					})
+					.catch((error) => {
+						console.log(`${error.response?.statusText}: ${error.message}`);
+						toast.error(
+							"We couldn't process the booking. Please try again a bit later.",
+						);
+					});
+			}
+		});
+		// Call API to send data to the server/database
 	};
 	return (
 		// Send Parcel Form
@@ -270,13 +359,15 @@ const SendParcelForm = () => {
 					{/* Parcel Pickup Instructions */}
 					<div className="space-y-1">
 						<label>
-							<span className="font-medium">Pickup Instructions</span>
+							<span className="font-medium">
+								Pickup Instructions{" "}
+								<span className="font-semibold">(Optional)</span>
+							</span>
 							<textarea
 								rows={3}
 								className="textarea mt-1 w-full resize-none font-medium text-[1rem] rounded-lg"
 								placeholder="Pickup Instructions"
 								{...register("pickup_instructions", {
-									required: "Pickup Instructions are required",
 									maxLength: {
 										value: 250,
 										message: "Maximum 250 characters allowed",
@@ -419,13 +510,15 @@ const SendParcelForm = () => {
 					{/* Parcel Delivery Instructions */}
 					<div className="space-y-1">
 						<label>
-							<span className="font-medium">Delivery Instructions</span>
+							<span className="font-medium">
+								Delivery Instructions{" "}
+								<span className="font-semibold">(Optional)</span>
+							</span>
 							<textarea
 								rows={3}
 								className="textarea mt-1 w-full resize-none font-medium text-[1rem] rounded-lg"
 								placeholder="Delivery Instructions"
 								{...register("delivery_instructions", {
-									required: "Delivery Instructions are required",
 									maxLength: {
 										value: 250,
 										message: "Maximum 250 characters allowed",
