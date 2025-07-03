@@ -5,6 +5,7 @@ import {
 	TbPackages,
 	TbUserSquareRounded,
 } from "react-icons/tb";
+import "./Sidebar.css";
 import Logo from "../shared/Logo";
 import { NavLink } from "react-router";
 

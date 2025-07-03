@@ -11,7 +11,7 @@ const DashboardLayout = () => {
 				className="drawer-toggle"
 			/>
 			{/* Main page */}
-			<div className="drawer-content p-12">
+			<div className="drawer-content p-10">
 				<Outlet />
 			</div>
 			{/* Sidebar */}
