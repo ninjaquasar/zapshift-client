@@ -40,6 +40,37 @@ const NavBar = () => {
 							Be a Rider
 						</button>
 					</Link>
+					{user ? (
+						<div className="dropdown dropdown-end">
+							<button
+								type="button"
+								className="cursor-pointer"
+							>
+								{user?.photoURL ? (
+									<div className="avatar size-11 rounded-full">
+										<img
+											src={user.photoURL}
+											alt="User Picture"
+										/>
+									</div>
+								) : (
+									<div className="avatar avatar-placeholder">
+										<div className="bg-neutral-200 size-11 ring ring-primary rounded-full">
+											<span className="text-2xl">U</span>
+										</div>
+									</div>
+								)}
+							</button>
+							<ul className="dropdown-content menu bg-neutral-100 rounded-xl w-48 mt-2 p-2 shadow-md">
+								<li>
+									<Link to="/dashboard/profile">Profile</Link>
+								</li>
+								<li>
+									<Link to="/dashboard">Dashboard</Link>
+								</li>
+							</ul>
+						</div>
+					) : null}
 				</div>
 			</nav>
 		</header>
