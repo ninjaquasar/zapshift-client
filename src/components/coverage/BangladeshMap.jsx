@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 
 const BangladeshMap = ({ markingLocations }) => {
 	return (
+		// Map container
 		<MapContainer
 			center={[24, 90.5]}
 			zoom={6.5}
@@ -13,11 +14,14 @@ const BangladeshMap = ({ markingLocations }) => {
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
+			{/* Loop through specified locations and mark them */}
 			{markingLocations.map((location) => (
 				<Marker
 					key={[location.latitude, location.longitude]}
+					// Specify the marker location
 					position={[location.latitude, location.longitude]}
 				>
+					{/* Popup message to show on clicking a marker */}
 					<Popup>
 						<span>{location.region}</span>
 						<br />

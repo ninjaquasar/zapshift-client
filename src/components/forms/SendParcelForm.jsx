@@ -114,6 +114,7 @@ const SendParcelForm = () => {
 			confirmButtonText: "Confirm Booking",
 			cancelButtonText: "Go Back to Editing",
 		}).then((result) => {
+			// Send parcel data to server/database if confirmed
 			if (result.isConfirmed) {
 				apiClient
 					.post("/parcels", cleanedData)
@@ -134,7 +135,6 @@ const SendParcelForm = () => {
 					});
 			}
 		});
-		// Call API to send data to the server/database
 	};
 	return (
 		// Send Parcel Form
@@ -227,7 +227,7 @@ const SendParcelForm = () => {
 					</div>
 				)}
 			</div>
-			{/* A Divider line (just for UX enhancement) */}
+			{/* A horizontal divider line */}
 			<Divider />
 			{/* Sender & Receiver Details in 2-column layout */}
 			<div className="grid grid-cols-2 gap-8">
