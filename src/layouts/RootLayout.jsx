@@ -6,13 +6,17 @@ import { Toaster } from "sonner";
 const RootLayout = () => {
 	return (
 		<main className="px-12 py-8">
+			{/* Toast container from Sonner */}
 			<Toaster
 				position="top-left"
 				expand
 				richColors
 			/>
+			{/* Navbar */}
 			<NavBar />
+			{/* Main page content */}
 			<Outlet />
+			{/* Footer */}
 			<Footer />
 		</main>
 	);
