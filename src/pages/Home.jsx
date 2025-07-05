@@ -8,6 +8,7 @@ import BecomeMerchant from "../components/home/BecomeMerchant";
 const Home = () => {
 	return (
 		<div className="pt-16 pb-24 space-y-24">
+			{/* Home page sections */}
 			<Hero />
 			<HowItWorks />
 			<Services />
