@@ -12,7 +12,7 @@ const Coverage = () => {
 		>
 			<div className="px-24 py-20 bg-light rounded-4xl space-y-12">
 				<h1 className="text-5xl font-extrabold text-secondary">
-					We are available in 64 districts
+					We are available in {districts.length} districts
 				</h1>
 				<div
 					id="coverage-search"

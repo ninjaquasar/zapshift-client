@@ -10,6 +10,7 @@
 	--color-secondary: #03373d;
 	--color-success: #3ba976;
 	--color-error: #dc3545;
+	--color-warning: #eea006;
 }
 
 @theme {
