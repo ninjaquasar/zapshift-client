@@ -44,7 +44,7 @@ const Coverage = () => {
 				<h3 className="text-3xl font-extrabold text-secondary">
 					We deliver almost all over Bangladesh
 				</h3>
-				{/* The map, Ctrl+Click on 'BangladeshMap' to see the full component */}
+				{/* The coverage map, Ctrl+Click on 'BangladeshMap' to see the full component */}
 				<div className="w-full h-112 rounded-xl">
 					<BangladeshMap markingLocations={districts} />
 				</div>
