@@ -4,6 +4,7 @@ import Logo from "../shared/Logo";
 import "./NavBar.css";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "sonner";
+import { IoLogoGithub } from "react-icons/io5";
 
 const NavBar = () => {
 	const { user, logoutUser } = useAuth();
@@ -42,7 +43,7 @@ const NavBar = () => {
 						<Link to="/auth/login">
 							<button
 								type="button"
-								className="btn btn-lg btn-outline  text-neutral-800 rounded-lg"
+								className="btn btn-lg btn-outline text-neutral-800 rounded-lg"
 							>
 								Sign In
 							</button>
@@ -51,7 +52,7 @@ const NavBar = () => {
 					<Link to="/">
 						<button
 							type="button"
-							className="btn btn-lg btn-primary  text-neutral-800 rounded-lg"
+							className="btn btn-lg btn-primary text-neutral-800 rounded-lg"
 						>
 							Be a Rider
 						</button>
@@ -87,6 +88,18 @@ const NavBar = () => {
 							</ul>
 						</div>
 					) : null}
+					<a
+						href="https://github.com/ninjaquasar/zapshift-client"
+						target="_blank"
+					>
+						<button
+							type="button"
+							className="btn px-1 btn-neutral rounded-lg"
+							title="Our GitHub Repository"
+						>
+							<IoLogoGithub size={28} />
+						</button>
+					</a>
 				</div>
 			</nav>
 		</header>
