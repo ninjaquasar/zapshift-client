@@ -10,6 +10,7 @@ const MyParcelRow = ({ parcel }) => {
 	// Destructure necessary info
 	const {
 		_id,
+		tracking_id,
 		booked_at: bookedAt,
 		parcel: { name: parcelName, type: parcelType },
 		delivery: { status: deliveryStatus },
@@ -64,9 +65,9 @@ const MyParcelRow = ({ parcel }) => {
 		});
 	};
 	return (
-		<tr key={_id}>
+		<tr key={tracking_id}>
 			{/* Parcel Id, Name */}
-			<td className="px-3 py-2 truncate">{_id}</td>
+			<td className="px-3 py-2 truncate font-semibold">{tracking_id.toUpperCase()}</td>
 			<td className="px-3 py-2 truncate">{parcelName}</td>
 			{/* Parcel Type */}
 			<td className="p-3 flex items-center gap-x-1 capitalize">

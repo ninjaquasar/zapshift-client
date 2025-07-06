@@ -29,7 +29,7 @@ const MyParcels = () => {
 				{/* Table header */}
 				<thead className="text-lg bg-[#e6e6e9] text-neutral-700">
 					<tr>
-						<th className="p-3">ID</th>
+						<th className="p-3 text-secondary">ID</th>
 						<th className="p-3">Parcel Name</th>
 						<th className="p-3">Parcel Type</th>
 						<th className="p-3">Delivery Status</th>

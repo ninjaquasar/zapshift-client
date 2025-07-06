@@ -66,8 +66,12 @@ const SendParcelForm = () => {
 			data.sender_warehouse,
 			data.receiver_warehouse,
 		);
+		// Generate parcel tracking-id
+		const shortUUID = crypto.randomUUID().split("-")[0];
+		const trackingId = `zp-${shortUUID}`;
 		// Clean data and add extra necessary data
 		const cleanedData = {
+			tracking_id: trackingId,
 			booked_at: new Date().toISOString(),
 			booked_by: user.email,
 			delivery: {
