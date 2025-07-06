@@ -66,7 +66,7 @@ const MyParcelRow = ({ parcel }) => {
 	};
 	return (
 		<tr key={tracking_id}>
-			{/* Parcel Id, Name */}
+			{/* Parcel Tracking Id, Name */}
 			<td className="px-3 py-2 truncate font-semibold">{tracking_id.toUpperCase()}</td>
 			<td className="px-3 py-2 truncate">{parcelName}</td>
 			{/* Parcel Type */}

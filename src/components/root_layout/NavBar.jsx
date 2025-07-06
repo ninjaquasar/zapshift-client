@@ -1,11 +1,26 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import HorizontalLinks from "../shared/HorizontalLinks";
 import Logo from "../shared/Logo";
 import "./NavBar.css";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "sonner";
 
 const NavBar = () => {
-	const { user } = useAuth();
+	const { user, logoutUser } = useAuth();
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		logoutUser()
+			.then((authCredentials) => {
+				toast.success("Logged out from account");
+				setTimeout(() => {
+					navigate("/auth/login");
+				}, 2500);
+			})
+			.catch((error) => {
+				console.log(`${error?.message} [${error?.code}]`);
+				toast.error("Couldn't logout from account. Please try once more?");
+			});
+	};
 	return (
 		<header>
 			<nav
@@ -19,6 +34,7 @@ const NavBar = () => {
 						<button
 							type="button"
 							className="btn btn-lg btn-outline  text-neutral-800 rounded-lg"
+							onClick={handleLogout}
 						>
 							Logout
 						</button>
