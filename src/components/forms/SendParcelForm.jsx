@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Divider from "../shared/Divider";
 import calculateTotalDeliveryCost from "../../utils/calculateTotalDeliveryCost";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import apiClient from "../../services/apiClient";
 import { toast } from "sonner";
 import useAuth from "../../hooks/useAuth";
@@ -12,6 +12,7 @@ const SendParcelForm = () => {
 	const {
 		register,
 		watch,
+		reset,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
@@ -36,6 +37,8 @@ const SendParcelForm = () => {
 		: [];
 	// Get currently logged-in user data
 	const { user } = useAuth();
+	// Use `Navigate` hook to navigate to a specific route
+	const navigate = useNavigate();
 	// Handle function for sending parcel or confirm booking
 	const handleConfirmBooking = (data) => {
 		// Destructure data to clean it
@@ -78,7 +81,7 @@ const SendParcelForm = () => {
 			parcel: {
 				name: parcel_name,
 				type: parcel_type,
-				...(parcel_type === "Not Document" && { weight: parseFloat(parcel_weight) }),
+				...(parcel_type === "not document" && { weight: parseFloat(parcel_weight) }),
 			},
 			payment: {
 				total_amount: deliveryCost,
@@ -121,11 +124,12 @@ const SendParcelForm = () => {
 					.then((response) => {
 						if (response.data?.insertedId) {
 							toast.success("Your parcel is booked.");
-						} else {
+							reset();
+							navigate("/dashboard/my-parcels");
+						} else
 							toast.error(
 								"We couldn't complete the booking. Please try one more time.",
 							);
-						}
 					})
 					.catch((error) => {
 						console.log(`${error.response?.statusText}: ${error.message}`);
@@ -149,7 +153,7 @@ const SendParcelForm = () => {
 					<div className="flex items-center gap-x-2">
 						<input
 							type="radio"
-							value="Document"
+							value="document"
 							className="radio radio-success"
 							{...register("parcel_type", {
 								required: "Parcel Type is required",
@@ -162,7 +166,7 @@ const SendParcelForm = () => {
 					<div className="flex items-center gap-x-2">
 						<input
 							type="radio"
-							value="Not Document"
+							value="not document"
 							className="radio radio-success"
 							{...register("parcel_type", {
 								required: "Parcel Type is required",
@@ -197,7 +201,7 @@ const SendParcelForm = () => {
 					)}
 				</div>
 				{/* Parcel Weight (show/hide based on parcel type) */}
-				{parcelType === "Not Document" && (
+				{parcelType === "not document" && (
 					<div className="space-y-1">
 						<label className="input w-full font-medium text-[1rem] rounded-lg">
 							<span className="label text-dark">Parcel Weight</span>

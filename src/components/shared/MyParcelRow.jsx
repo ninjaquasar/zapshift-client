@@ -1,7 +1,13 @@
 import { TbCreditCard, TbDots, TbEye, TbNotes, TbPackage, TbTrashX } from "react-icons/tb";
 import { Link } from "react-router";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
+import apiClient from "../../services/apiClient";
+import { useQueryClient } from "@tanstack/react-query";
+import useAuth from "../../hooks/useAuth";
 
 const MyParcelRow = ({ parcel }) => {
+	// Destructure necessary info
 	const {
 		_id,
 		booked_at: bookedAt,
@@ -10,14 +16,61 @@ const MyParcelRow = ({ parcel }) => {
 		payment: { status: paymentStatus },
 		receiver: { name: receiverName },
 	} = parcel;
+	// Use TanStack Query Client hook
+	const { invalidateQueries: refetch } = useQueryClient();
+	// Import current user from our custom auth hook
+	const { user } = useAuth();
+	// Handle delete operation
+	const handleDelete = () => {
+		// Fire confirmation popup
+		Swal.fire({
+			icon: "warning",
+			iconColor: "var(--color-warning)",
+			title: "Confirm Deletion",
+			text: "The parcel will be deleted permanantly.",
+			showCancelButton: true,
+			confirmButtonText: "Yes, Delete",
+			cancelButtonText: "No, Cancel",
+			confirmButtonColor: "var(--color-success)",
+			cancelButtonColor: "var(--color-error)",
+		}).then((result) => {
+			// Work to do if user confirms deletion
+			if (result.isConfirmed) {
+				// Delete parcel from database
+				apiClient
+					.delete(`/parcels/${_id}`)
+					.then((res) => {
+						// Check if deleted successfully
+						if (res.status === 204) {
+							// Show success message if deleted successfully
+							toast.success("The parcel is deleted.");
+							// Remove the deleted parcel from UI instantly (Need to fix it)
+							refetch({
+								queryKey: ["my-parcels", user?.email],
+							});
+						} else
+							toast.error(
+								"We couldn't delete the parcel completely. Please try once more.",
+							);
+					})
+					.catch((error) => {
+						// Throw API-related or Fetch-related error
+						console.log(`${error?.response?.statusText}: ${error?.message}`);
+						toast.error(
+							"We couldn't delete the parcel. Please try again in a bit.",
+						);
+					});
+			}
+		});
+	};
 	return (
 		<tr key={_id}>
 			{/* Parcel Id, Name */}
 			<td className="px-3 py-2 truncate">{_id}</td>
 			<td className="px-3 py-2 truncate">{parcelName}</td>
 			{/* Parcel Type */}
-			<td className="p-3 flex items-center gap-x-1">
-				{parcelType === "Document" ? <TbNotes size={20} /> : <TbPackage size={20} />}{" "}
+			<td className="p-3 flex items-center gap-x-1 capitalize">
+				{parcelType === "document" ? <TbNotes size={20} /> : <TbPackage size={20} />}{" "}
 				{parcelType}
 			</td>
 			{/* Delivery status */}
@@ -92,6 +145,7 @@ const MyParcelRow = ({ parcel }) => {
 							<button
 								type="button"
 								className="flex items-center gap-x-2 px-2 rounded-md"
+								onClick={handleDelete}
 							>
 								<TbTrashX
 									size={20}
