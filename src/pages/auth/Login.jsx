@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../../components/shared/SocialLogin";
@@ -13,6 +13,8 @@ const Login = () => {
 	} = useForm();
 	const { loginUserWithEmailAndPassword } = useAuth();
 	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location?.state?.from || "/";
 	const handleLogin = (data) => {
 		const { email, password } = data;
 		loginUserWithEmailAndPassword(email, password)
@@ -20,8 +22,8 @@ const Login = () => {
 				reset();
 				toast.success("Logged in to your account");
 				setTimeout(() => {
-					navigate("/");
-				}, 4000);
+					navigate(from);
+				}, 3000);
 			})
 			.catch((error) => {
 				console.log(`${error.message} [${error.code}]`);

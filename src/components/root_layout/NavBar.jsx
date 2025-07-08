@@ -68,6 +68,8 @@ const NavBar = () => {
 										<img
 											src={user.photoURL}
 											alt="User Picture"
+											className="rounded-full"
+											referrerPolicy="no-referrer"
 										/>
 									</div>
 								) : (
@@ -79,6 +81,11 @@ const NavBar = () => {
 								)}
 							</button>
 							<ul className="dropdown-content menu bg-neutral-100 rounded-xl w-48 mt-2 p-2 shadow-md">
+								<li>
+									<h5 className="text-[1rem] font-bold text-secondary line-clamp-1 leading-7">
+										{user.displayName}
+									</h5>
+								</li>
 								<li>
 									<Link to="/dashboard/profile">Profile</Link>
 								</li>

@@ -1,18 +1,20 @@
 import { IoLogoGoogle } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const SocialLogin = () => {
 	const { loginUserWithGoogle } = useAuth();
 	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location?.state?.from || "/";
 	const handleGoogleLogin = () => {
 		loginUserWithGoogle()
 			.then((authCredentials) => {
 				toast.success("Logged in to your account");
 				setTimeout(() => {
-					navigate("/");
-				}, 4000);
+					navigate(from);
+				}, 3000);
 			})
 			.catch((error) => {
 				console.log(`${error.message} [${error.code}]`);
