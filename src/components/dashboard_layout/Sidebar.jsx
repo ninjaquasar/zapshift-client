@@ -1,6 +1,7 @@
 import {
 	TbBike,
 	TbCreditCard,
+	TbDashboard,
 	TbPackage,
 	TbPackages,
 	TbUserSquareRounded,
@@ -21,6 +22,18 @@ const Sidebar = () => {
 				<Logo />
 				{/* Vertical Menu */}
 				<ul className="mt-8 text-xl font-medium space-y-1">
+					<li>
+						<NavLink
+							to="/dashboard"
+							className="flex items-center gap-x-3 px-3 py-2 rounded-lg border-l border-l-transparent hover:border-l-secondary hover:bg-gradient-to-l hover:from-[#d9dcdf] hover:to-transparent transition-all duration-100"
+						>
+							<TbDashboard
+								size={24}
+								className="text-secondary"
+							/>
+							Dashboard
+						</NavLink>
+					</li>
 					<li>
 						<NavLink
 							to="/dashboard/profile"
